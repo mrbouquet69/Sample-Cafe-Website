@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We.Coffee | Coastal Brews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-blue: #0077be;
+            --deep-ocean: #003366;
+            --sand-light: #fdf5e6;
+            --sand-dark: #f4e4bc;
+            --white: #ffffff;
+            --text-main: #2d3436;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-main);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            text-decoration: none;            font-weight: 700;
+            letter-spacing: -1px;
+        }        nav a {
+            text-decoration: none;
+            color: var(--deep-ocean);
+            margin-left: 2.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0, 51, 102, 0.4), rgba(0, 51, 102, 0.2)), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        /* --- MENU SECTION --- */
+        .section {
+            padding: 6rem 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            color: var(--deep-ocean);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-item {
+            padding: 2rem;
+            border-radius: 12px;
+            background: var(--white);
+            border: 1px solid #eee;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: var(--primary-blue);
+        }
+
+        .menu-item h3 {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--deep-ocean);
+        }
+
+        .price {
+            color: var(--primary-blue);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+
+        /* --- STORE INFO & MAP --- */
+        .info-wrapper {
+            background-color: var(--sand-light);
+            padding: 6rem 8%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hours-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hours-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .hours-list li {
+            display: flex;            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 450px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--deep-ocean);
+            color: var(--white);
+            padding: 3rem 8%;
+            text-align: center;
+        }
+
+        /* --- ANIMATIONS --- */        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .info-wrapper { grid-template-columns: 1fr; }
+            header { padding: 1rem 5%; }
+            nav a { margin-left: 1rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">We.Coffee</a>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#visit">Visit</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Freshly Brewed by the Sea</h1>
+        <p>Experience the perfect blend of coastal calm and premium caffeine.</p>
+    </section>
+
+    <section id="menu" class="section">
+        <h2 class="section-title">Coastal Curation</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3><span>Pacific Latte</span> <span class="price">$5.50</span></h3>
+                <p>Creamy espresso with hints of vanilla and organic sea salt foam.</p>            </div>
+            <div class="menu-item">
+                <h3><span>Driftwood Cold Brew</span> <span class="price">$4.75</span></h3>
+                <p>Oak-aged cold brew served over crystal clear ice spheres.</p>
+            </div>
+            <div class="menu-item">
+                <h3><span>Sunrise Bowl</span> <span class="price">$12.00</span></h3>
+                <p>Açai topped with coastal berries, honey, and house-made granola.</p>
+            </div>
+            <div class="menu-item">
+                <h3><span>Tidal Toast</span> <span class="price">$9.50</span></h3>
+                <p>Smashed avocado, radish, and lemon oil on artisan sourdough.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="visit" class="info-wrapper">
+        <div class="hours-card">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-ocean);">Visit Us</h2>
+            <p>123 Ocean Drive, Malibu, California</p>
+            <ul class="hours-list">
+                <li><strong>Mon - Fri</strong> <span>7:00am - 6:00pm</span></li>
+                <li><strong>Saturday</strong> <span>8:00am - 8:00pm</span></li>
+                <li><strong>Sunday</strong> <span>8:00am - 5:00pm</span></li>
+            </ul>            <p><em>*Kitchen closes 1 hour before shop close.</em></p>
+        </div>
+                <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105744.25134743258!2d-118.8472004!3d34.020479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e81da9f908d63f%3A0x93b781724ae13f44!2sMalibu%2C%20CA!5e0!3m2!1sen!2sus!4v1695000000000!5m2!1sen!2sus" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 We.Coffee</p>
+    </footer>
+
+</body>
+</html>
