@@ -1,277 +1,865 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We.Coffee | Coastal Brews</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CSS VARIABLES --- */
-        :root {
-            --primary-blue: #0077be;
-            --deep-ocean: #003366;
-            --sand-light: #fdf5e6;
-            --sand-dark: #f4e4bc;
-            --white: #ffffff;
-            --text-main: #2d3436;
-            --transition: all 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>We.Coffee | Coastal Brews</title>
 
-        /* --- RESET & BASE --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
 
-        body {
-            background-color: var(--white);
-            color: var(--text-main);
-            line-height: 1.7;
-            scroll-behavior: smooth;
-        }
+  <style>
+    /* =========================
+       Design System
+    ========================== */
+    :root{
+      --primary: #0b78c9;
+      --primary-2: #065fa0;
+      --ink: #0c1b2a;
+      --ink-2:#233447;
+      --muted:#607086;
 
-        /* --- HEADER & NAVIGATION --- */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);        }
+      --sand-0:#fffdf7;
+      --sand-1:#fdf5e6;
+      --sand-2:#f4e4bc;
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-            text-decoration: none;            font-weight: 700;
-            letter-spacing: -1px;
-        }        nav a {
-            text-decoration: none;
-            color: var(--deep-ocean);
-            margin-left: 2.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            position: relative;
-        }
+      --card:#ffffff;
+      --stroke: rgba(12, 27, 42, 0.10);
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-blue);
-            transition: var(--transition);
-        }
+      --shadow-sm: 0 8px 20px rgba(0,0,0,.06);
+      --shadow-md: 0 18px 45px rgba(0,0,0,.10);
+      --shadow-lg: 0 28px 70px rgba(0,0,0,.14);
 
-        nav a:hover::after {
-            width: 100%;
-        }
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 85vh;
-            background: linear-gradient(rgba(0, 51, 102, 0.4), rgba(0, 51, 102, 0.2)), 
-                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--white);
-            text-align: center;
-            padding: 0 20px;
-        }
+      --container: 1120px;
+      --pad-x: clamp(18px, 4vw, 56px);
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease;
-        }
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --t: 220ms var(--ease);
+    }
 
-        /* --- MENU SECTION --- */
-        .section {
-            padding: 6rem 8%;
-        }
+    /* =========================
+       Reset / Base
+    ========================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html:focus-within { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink-2);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(11,120,201,.10), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(244,228,188,.55), transparent 55%),
+                  var(--sand-0);
+      line-height: 1.65;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .section-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 4rem;
-            color: var(--deep-ocean);
-        }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    :focus-visible {
+      outline: 3px solid rgba(11,120,201,.35);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
+    .container {
+      width: min(var(--container), 100% - (var(--pad-x) * 2));
+      margin-inline: auto;
+    }
 
-        .menu-item {
-            padding: 2rem;
-            border-radius: 12px;
-            background: var(--white);
-            border: 1px solid #eee;
-            transition: var(--transition);
-            cursor: pointer;
-        }
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
 
-        .menu-item:hover {
-            transform: translateY(-10px);            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            border-color: var(--primary-blue);
-        }
+    /* =========================
+       Header / Nav
+    ========================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(12,27,42,.06);
+    }
 
-        .menu-item h3 {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--deep-ocean);
-        }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
 
-        .price {
-            color: var(--primary-blue);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-        }
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: -1px;
+      font-size: 1.75rem;
+      color: var(--primary-2);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .logo .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), #31b8ff);
+      box-shadow: 0 10px 20px rgba(11,120,201,.25);
+      transform: translateY(-6px);
+    }
 
-        /* --- STORE INFO & MAP --- */
-        .info-wrapper {
-            background-color: var(--sand-light);
-            padding: 6rem 8%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
 
-        .hours-card {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
+    .nav-link {
+      font-weight: 600;
+      font-size: .88rem;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: var(--ink);
+      opacity: .92;
+      position: relative;
+      padding: 10px 2px;
+      transition: var(--t);
+    }
+    .nav-link:hover { opacity: 1; color: var(--primary-2); }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 6px;
+      width: 0;
+      height: 2px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--primary), #31b8ff);
+      transition: var(--t);
+    }
+    .nav-link:hover::after { width: 100%; }
 
-        .hours-list {
-            list-style: none;
-            margin: 2rem 0;
-        }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), #31b8ff);
+      color: #fff;
+      font-weight: 700;
+      font-size: .92rem;
+      box-shadow: 0 16px 32px rgba(11,120,201,.22);
+      transition: transform var(--t), box-shadow var(--t), filter var(--t);
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 44px rgba(11,120,201,.28);
+      filter: saturate(1.05);
+    }
 
-        .hours-list li {
-            display: flex;            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
+    /* Mobile nav */
+    .burger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(12,27,42,.10);
+      background: rgba(255,255,255,.65);
+      box-shadow: var(--shadow-sm);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--t), background var(--t);
+    }
+    .burger:hover { transform: translateY(-1px); background: rgba(255,255,255,.85); }
 
-        .map-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            height: 450px;
-        }
+    .burger-lines, .burger-lines::before, .burger-lines::after{
+      content:"";
+      display:block;
+      width: 18px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 99px;
+      position: relative;
+      transition: transform var(--t), top var(--t), opacity var(--t);
+    }
+    .burger-lines::before{ position:absolute; top:-6px; }
+    .burger-lines::after{ position:absolute; top:6px; }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid rgba(12,27,42,.06);
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(14px);
+    }
+    .mobile-panel-inner{
+      padding: 12px 0 16px;
+      display: grid;
+      gap: 10px;
+    }
+    .mobile-panel a{
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(12,27,42,.08);
+      background: rgba(255,255,255,.75);
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .mobile-panel a:active { transform: translateY(1px); }
 
-        /* --- FOOTER --- */
-        footer {
-            background: var(--deep-ocean);
-            color: var(--white);
-            padding: 3rem 8%;
-            text-align: center;
-        }
+    /* Open state */
+    header[data-open="true"] .mobile-panel { display: block; }
+    header[data-open="true"] .burger-lines { background: transparent; }
+    header[data-open="true"] .burger-lines::before { top: 0; transform: rotate(45deg); }
+    header[data-open="true"] .burger-lines::after { top: 0; transform: rotate(-45deg); }
 
-        /* --- ANIMATIONS --- */        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* =========================
+       Hero
+    ========================== */
+    .hero {
+      position: relative;
+      min-height: clamp(560px, 82vh, 820px);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(12,27,42,.06);
+    }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 968px) {
-            .info-wrapper { grid-template-columns: 1fr; }
-            header { padding: 1rem 5%; }
-            nav a { margin-left: 1rem; font-size: 0.8rem; }
-        }
-    </style>
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(6,95,160,.65), rgba(0,51,102,.25) 60%, rgba(255,255,255,.0)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1650&q=85");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03);
+      filter: contrast(1.05) saturate(1.05);
+    }
+
+    .hero::after{
+      /* soft coastal “mist” */
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 420px at 20% 20%, rgba(49,184,255,.25), transparent 60%),
+        radial-gradient(700px 340px at 85% 25%, rgba(244,228,188,.25), transparent 60%),
+        radial-gradient(900px 520px at 50% 105%, rgba(255,255,255,.50), transparent 65%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position: relative;
+      padding: 70px 0;
+      text-align: center;
+      color: #fff;
+      width: min(860px, 100%);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.20);
+      backdrop-filter: blur(10px);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .75rem;
+    }
+    .kicker .pill-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #fff;
+      opacity: .85;
+    }
+
+    .hero h1{
+      font-family: "Playfair Display", serif;
+      letter-spacing: -0.02em;
+      font-size: clamp(2.6rem, 5vw, 4.35rem);
+      line-height: 1.06;
+      margin: 14px 0 10px;
+      text-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .hero p{
+      margin: 0 auto;
+      max-width: 52ch;
+      font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+      opacity: .94;
+      text-shadow: 0 12px 26px rgba(0,0,0,.28);
+    }
+
+    .hero-actions{
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-weight: 800;
+      transition: transform var(--t), box-shadow var(--t), background var(--t), border-color var(--t);
+      box-shadow: 0 18px 40px rgba(0,0,0,.16);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.32);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--primary), #31b8ff);
+      border-color: rgba(255,255,255,.0);
+      box-shadow: 0 24px 55px rgba(11,120,201,.30);
+    }
+    .btn.primary:hover{
+      box-shadow: 0 30px 70px rgba(11,120,201,.36);
+    }
+
+    .hero-stats{
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .stat{
+      border-radius: 16px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      padding: 14px 12px;
+    }
+    .stat strong{
+      display:block;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+    .stat span{
+      display:block;
+      font-size: .82rem;
+      opacity: .9;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       Sections
+    ========================== */
+    section { scroll-margin-top: 92px; }
+
+    .section {
+      padding: clamp(56px, 7vw, 92px) 0;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .section-title{
+      margin:0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.0rem, 3.2vw, 2.8rem);
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .section-subtitle{
+      margin: 6px 0 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .divider{
+      height: 1px;
+      background: linear-gradient(90deg, rgba(12,27,42,.08), rgba(12,27,42,0));
+      margin-top: 18px;
+    }
+
+    /* =========================
+       Menu Grid / Cards
+    ========================== */
+    .menu-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .menu-item{
+      grid-column: span 6;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(12,27,42,.10);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+      position: relative;
+      overflow:hidden;
+      cursor: default;
+    }
+
+    .menu-item::before{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background:
+        radial-gradient(520px 160px at 10% 0%, rgba(49,184,255,.18), transparent 60%),
+        radial-gradient(520px 220px at 100% 10%, rgba(244,228,188,.25), transparent 55%);
+      opacity: .8;
+      pointer-events:none;
+    }
+
+    .menu-item:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(11,120,201,.30);
+    }
+
+    .menu-top{
+      position: relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .menu-name{
+      margin:0;
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .price{
+      font-weight: 800;
+      color: var(--primary-2);
+      background: rgba(11,120,201,.10);
+      border: 1px solid rgba(11,120,201,.16);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .menu-desc{
+      position: relative;
+      margin: 0;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .menu-tags{
+      position: relative;
+      margin-top: 14px;
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag{
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(12,27,42,.78);
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(12,27,42,.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    /* =========================
+       Visit / Info
+    ========================== */
+    .visit-wrap{
+      background: linear-gradient(180deg, rgba(244,228,188,.35), rgba(255,255,255,0));
+      border-top: 1px solid rgba(12,27,42,.06);
+      border-bottom: 1px solid rgba(12,27,42,.06);
+    }
+
+    .visit-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card{
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(12,27,42,.10);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow:hidden;
+    }
+
+    .hours-card{
+      padding: 22px;
+    }
+
+    .visit-title{
+      margin:0;
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .visit-address{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hours-list{
+      list-style:none;
+      padding:0;
+      margin: 16px 0 0;
+      border-radius: 16px;
+      border: 1px solid rgba(12,27,42,.08);
+      background: rgba(255,255,255,.65);
+      overflow:hidden;
+    }
+
+    .hours-list li{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(12,27,42,.06);
+      gap: 14px;
+    }
+    .hours-list li:last-child{ border-bottom: 0; }
+    .hours-list strong{ color: var(--ink); }
+    .hours-list span{ color: var(--ink-2); font-weight: 600; }
+
+    .note{
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .map-container{
+      height: 100%;
+      min-height: 420px;
+    }
+    .map-container iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: saturate(1.02) contrast(1.02);
+    }
+
+    /* =========================
+       Footer
+    ========================== */
+    footer{
+      background: linear-gradient(180deg, #06233b, #04192b);
+      color: rgba(255,255,255,.92);
+      padding: 34px 0;
+      margin-top: 0;
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-inner p{ margin: 0; }
+    .footer-links{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: .92;
+    }
+    .footer-links a{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* =========================
+       Motion preferences
+    ========================== */
+    @media (prefers-reduced-motion: reduce){
+      html:focus-within { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* =========================
+       Responsive
+    ========================== */
+    @media (max-width: 980px){
+      nav { display:none; }
+      .burger { display: inline-flex; }
+      .hero-stats{ grid-template-columns: 1fr; }
+      .visit-grid{ grid-template-columns: 1fr; }
+      .map-container{ min-height: 360px; }
+      .menu-item{ grid-column: span 12; }
+    }
+
+    @media (min-width: 981px){
+      .mobile-panel { display: none !important; }
+    }
+
+    @media (max-width: 520px){
+      .hero-actions .btn { width: 100%; }
+      .stat{ text-align:left; }
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <a href="#" class="logo">We.Coffee</a>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#menu">Menu</a>
-            <a href="#visit">Visit</a>
-        </nav>
-    </header>
+  <header id="siteHeader" data-open="false">
+    <div class="container nav-bar">
+      <a class="logo" href="#home" aria-label="We.Coffee Home">
+        We.Coffee <span class="dot" aria-hidden="true"></span>
+      </a>
 
-    <section id="home" class="hero">
+      <nav aria-label="Primary navigation">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#visit">Visit</a>
+        <a class="nav-cta" href="#visit" aria-label="Get directions">Directions</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-controls="mobilePanel" aria-expanded="false">
+        <span class="burger-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container mobile-panel-inner" aria-label="Mobile navigation">
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#menu" class="mobile-link">Menu</a>
+        <a href="#visit" class="mobile-link">Visit</a>
+        <a href="#visit" class="mobile-link">Directions</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero" aria-label="Hero">
+      <div class="container hero-inner">
+        <div class="kicker"><span class="pill-dot" aria-hidden="true"></span> Coastal brews • premium espresso</div>
         <h1>Freshly Brewed by the Sea</h1>
-        <p>Experience the perfect blend of coastal calm and premium caffeine.</p>
+        <p>Coastal calm, dialed-in espresso, and a menu built for slow mornings and sunny afternoons.</p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#menu">Explore the Menu</a>
+          <a class="btn" href="#visit">Plan Your Visit</a>
+        </div>
+
+        <div class="hero-stats" role="list" aria-label="Highlights">
+          <div class="stat" role="listitem">
+            <strong>Single-origin</strong>
+            <span>Rotating beans</span>
+          </div>
+          <div class="stat" role="listitem">
+            <strong>House-made</strong>
+            <span>Seasonal kitchen</span>
+          </div>
+          <div class="stat" role="listitem">
+            <strong>Ocean-side</strong>
+            <span>Malibu vibes</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="menu" class="section">
-        <h2 class="section-title">Coastal Curation</h2>
-        <div class="menu-grid">
-            <div class="menu-item">
-                <h3><span>Pacific Latte</span> <span class="price">$5.50</span></h3>
-                <p>Creamy espresso with hints of vanilla and organic sea salt foam.</p>            </div>
-            <div class="menu-item">
-                <h3><span>Driftwood Cold Brew</span> <span class="price">$4.75</span></h3>
-                <p>Oak-aged cold brew served over crystal clear ice spheres.</p>
-            </div>
-            <div class="menu-item">
-                <h3><span>Sunrise Bowl</span> <span class="price">$12.00</span></h3>
-                <p>Açai topped with coastal berries, honey, and house-made granola.</p>
-            </div>
-            <div class="menu-item">
-                <h3><span>Tidal Toast</span> <span class="price">$9.50</span></h3>
-                <p>Smashed avocado, radish, and lemon oil on artisan sourdough.</p>
-            </div>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Coastal Curation</h2>
+            <p class="section-subtitle">A tight menu with a premium feel. Clean flavors, balanced sweetness, and a little sea-salt magic.</p>
+          </div>
         </div>
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="menu-grid" role="list" aria-label="Menu items">
+          <article class="menu-item" role="listitem">
+            <div class="menu-top">
+              <h3 class="menu-name">Pacific Latte</h3>
+              <div class="price">$5.50</div>
+            </div>
+            <p class="menu-desc">Creamy espresso with hints of vanilla and organic sea salt foam.</p>
+            <div class="menu-tags" aria-label="Tags">
+              <span class="tag">Signature</span>
+              <span class="tag">Vanilla</span>
+              <span class="tag">Sea salt</span>
+            </div>
+          </article>
+
+          <article class="menu-item" role="listitem">
+            <div class="menu-top">
+              <h3 class="menu-name">Driftwood Cold Brew</h3>
+              <div class="price">$4.75</div>
+            </div>
+            <p class="menu-desc">Oak-aged cold brew served over crystal-clear ice spheres.</p>
+            <div class="menu-tags" aria-label="Tags">
+              <span class="tag">Cold brew</span>
+              <span class="tag">Oak-aged</span>
+              <span class="tag">Smooth</span>
+            </div>
+          </article>
+
+          <article class="menu-item" role="listitem">
+            <div class="menu-top">
+              <h3 class="menu-name">Sunrise Bowl</h3>
+              <div class="price">$12.00</div>
+            </div>
+            <p class="menu-desc">Açai topped with coastal berries, honey, and house-made granola.</p>
+            <div class="menu-tags" aria-label="Tags">
+              <span class="tag">Açai</span>
+              <span class="tag">Fresh fruit</span>
+              <span class="tag">House granola</span>
+            </div>
+          </article>
+
+          <article class="menu-item" role="listitem">
+            <div class="menu-top">
+              <h3 class="menu-name">Tidal Toast</h3>
+              <div class="price">$9.50</div>
+            </div>
+            <p class="menu-desc">Smashed avocado, radish, and lemon oil on artisan sourdough.</p>
+            <div class="menu-tags" aria-label="Tags">
+              <span class="tag">Avocado</span>
+              <span class="tag">Sourdough</span>
+              <span class="tag">Bright</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="visit" class="info-wrapper">
-        <div class="hours-card">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-ocean);">Visit Us</h2>
-            <p>123 Ocean Drive, Malibu, California</p>
-            <ul class="hours-list">
-                <li><strong>Mon - Fri</strong> <span>7:00am - 6:00pm</span></li>
-                <li><strong>Saturday</strong> <span>8:00am - 8:00pm</span></li>
-                <li><strong>Sunday</strong> <span>8:00am - 5:00pm</span></li>
-            </ul>            <p><em>*Kitchen closes 1 hour before shop close.</em></p>
+    <section id="visit" class="section visit-wrap">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Visit</h2>
+            <p class="section-subtitle">Drop in for a quick flat white or stay awhile. The kitchen closes 1 hour before the shop.</p>
+          </div>
         </div>
-                <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105744.25134743258!2d-118.8472004!3d34.020479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e81da9f908d63f%3A0x93b781724ae13f44!2sMalibu%2C%20CA!5e0!3m2!1sen!2sus!4v1695000000000!5m2!1sen!2sus" 
-                allowfullscreen="" 
-                loading="lazy">
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="visit-grid" style="margin-top:18px;">
+          <div class="card hours-card">
+            <h3 class="visit-title">We’re here</h3>
+            <p class="visit-address">123 Ocean Drive, Malibu, California</p>
+
+            <ul class="hours-list" aria-label="Hours">
+              <li><strong>Mon – Fri</strong> <span>7:00am – 6:00pm</span></li>
+              <li><strong>Saturday</strong> <span>8:00am – 8:00pm</span></li>
+              <li><strong>Sunday</strong> <span>8:00am – 5:00pm</span></li>
+            </ul>
+
+            <p class="note"><em>*Kitchen closes 1 hour before shop close.</em></p>
+          </div>
+
+          <div class="card map-container" aria-label="Map">
+            <iframe
+              title="Map to We.Coffee Malibu"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105744.25134743258!2d-118.8472004!3d34.020479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e81da9f908d63f%3A0x93b781724ae13f44!2sMalibu%2C%20CA!5e0!3m2!1sen!2sus!4v1695000000000!5m2!1sen!2sus"
+              loading="lazy"
+              allowfullscreen=""
+              referrerpolicy="no-referrer-when-downgrade">
             </iframe>
+          </div>
         </div>
+      </div>
     </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2026 We.Coffee</p>
-    </footer>
+  <footer>
+    <div class="container footer-inner">
+      <p>&copy; 2026 We.Coffee</p>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="#menu">Menu</a>
+        <a href="#visit">Visit</a>
+        <a href="#home">Back to top</a>
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    // Accessible mobile menu toggle
+    (function () {
+      const header = document.getElementById("siteHeader");
+      const btn = document.getElementById("burgerBtn");
+      const panel = document.getElementById("mobilePanel");
+
+      function setOpen(isOpen){
+        header.dataset.open = String(isOpen);
+        btn.setAttribute("aria-expanded", String(isOpen));
+        btn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      }
+
+      btn.addEventListener("click", () => {
+        const open = header.dataset.open === "true";
+        setOpen(!open);
+      });
+
+      // Close on navigation
+      panel.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => setOpen(false));
+      });
+
+      // Close on Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setOpen(false);
+      });
+
+      // Close if resized to desktop
+      const mq = window.matchMedia("(min-width: 981px)");
+      mq.addEventListener("change", (e) => {
+        if (e.matches) setOpen(false);
+      });
+    })();
+  </script>
 </body>
 </html>
